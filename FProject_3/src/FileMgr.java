@@ -4,7 +4,7 @@ public class FileMgr {
 	private String TNID = "TNID.data";
 	private String SNID = "SNID.data";
 	private String ADFile = "ADMIN.data";
-	private String subs = "SUBS.data";
+	private String subs = "Subs.data";
 	private String adUser = "NULL";
 	private String adPass = "NULL";
 	private String temp = "temp.data";

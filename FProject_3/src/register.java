@@ -11,7 +11,7 @@ public class register extends RegForm implements corrector{
 	private FileReader reader;
 	private FileWriter writer;
 	private File file;
-	private BufferedReader br = new BufferedReader(reader);
+	private BufferedReader br;
 	
 	private String temp;				 // Holds user/number for comparison purposes
 	private String name,number;
@@ -19,50 +19,64 @@ public class register extends RegForm implements corrector{
 	private String fileName;			 // Holds filename depending on chosen option
 	private char choice;
 	boolean usrExist = false,numExist = false; // Flags for existing user/number
+	remover rem;
+	boolean done = false;
 	
 	register() throws IOException{
-		System.out.println("~~~~~~~~~~~~REGISTRATION~~~~~~~~~~~~");
-		System.out.println("1. Register Teacher");
-		System.out.println("2. Register Student");
-		System.out.println("3. Register Subscriber");
-		System.out.println("4. Remove Teacher");
-		System.out.println("5. Remove Student");
-		System.out.println("6. Remove Subscriber");
-		System.out.println("7. Quit");
-		choice = input.next().charAt(0);
 		
-		switch(choice) {
-			case '1': // Teacher register
-				fileName = mgr.getTNID();
-				System.out.print("Enter name: ");
-				name = input.nextLine();
-				System.out.print("Enter ID number: ");
-				number = input.nextLine();
-				correctionChk(name, number);
-				break;
-			case '2': // Student register
-				fileName = mgr.getSNID();
-				System.out.print("Enter name: ");
-				name = input.nextLine();
-				System.out.print("Enter ID number: ");
-				number = input.nextLine();
-				correctionChk(name, number);
-				break;
-			case '3': // Subscriber register
-				fileName = mgr.getSubs();
-				System.out.print("Enter name: ");
-				name = input.nextLine();
-				correctionChk(name, "0");
-				break;
-			default:
-				System.out.println("Invalid choice.");
+		while(!done) {
+			System.out.println("~~~~~~~~~~~~REGISTRATION~~~~~~~~~~~~");
+			System.out.println("1. Register Teacher");
+			System.out.println("2. Register Student");
+			System.out.println("3. Register Subscriber");
+			System.out.println("4. Remove Teacher");
+			System.out.println("5. Remove Student");
+			System.out.println("6. Remove Subscriber");
+			System.out.println("7. Quit");
+			choice = input.next().charAt(0);
+			
+			switch(choice) {
+				case '1': // Teacher register
+					fileName = mgr.getTNID();
+					System.out.print("Enter name: ");
+					name = input.nextLine();
+					System.out.print("Enter ID number: ");
+					number = input.nextLine();
+					correctionChk(name, number);
+					break;
+				case '2': // Student register
+					fileName = mgr.getSNID();
+					System.out.print("Enter name: ");
+					name = input.nextLine();
+					System.out.print("Enter ID number: ");
+					number = input.nextLine();
+					correctionChk(name, number);
+					break;
+				case '3': // Subscriber register
+					fileName = mgr.getSubs();
+					System.out.print("Enter name: ");
+					name = input.nextLine();
+					correctionChk(name, "0");
+					break;
+				default:
+					System.out.println("Invalid choice.");
+			}
+			
+			if(choice == '1' || choice == '2')
+				regForm(name,number);
+			if(choice == '3')
+				regForm(name);
+			if(choice == '3' || choice == '4') {
+				rem = new remover(name,number);
+				rem.RegForm(name,number);
+			}
+				
+			if(choice == '5')
+				rem = new remover(name,number);
+				rem.RegForm(name);
+			if(choice == '6')
+				done = true;
 		}
-		
-		if(choice == '1' || choice == '2')
-			regForm(name,number);
-		if(choice == '3')
-			regForm(name);
-		
 	}
 	
 	public void regForm(String name, String number) throws IOException{ // Option for students/teachers

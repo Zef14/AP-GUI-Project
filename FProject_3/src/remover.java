@@ -11,14 +11,10 @@ public class remover extends register implements corrector{
 	private FileWriter writer;
 	private File file;
 	private BufferedReader br;
-	private String name, number;
-	private String temp;
 	private FileMgr mgr = new FileMgr();
 	
 	remover(String name, String number) throws IOException{
 		super();
-		this.name = name;
-		this.number = number;
 	}
 	
 	public void RegForm(String name, String number) throws IOException{
@@ -80,35 +76,5 @@ public class remover extends register implements corrector{
     	br.close(); 
     	reader.close();
     	writer.close();
-	}
-	
-	public void comparator(String name, String number) throws IOException {
-		file = new File(mgr.getDir()+getFileName());
-		reader = new FileReader(file);
-		br = new BufferedReader(reader);
-		temp = br.readLine();
-		String[] splitLine;
-		name = this.name;
-		number = this.number;
-		
-		if(getChoice() == '1' || getChoice() == '2') { // Teachers/students
-			while((temp = br.readLine()) != null) {
-				splitLine = temp.split(","); // Separate name from ID and assign to array
-				temp = splitLine[0];		 // Assign user to temp
-				if(name.equals(temp)) 		 // Confirm username
-					usrExist = true;
-				
-				temp = splitLine[1]; 		 // assign number to temp
-
-				if(number.equals(temp)) 	 // Confirm number
-					numExist = true;
-			}
-		}
-		else { 								 // Subscribers
-			while((temp = br.readLine()) != null) {
-				if(name.equals(temp)) 		 // Confirm username
-					usrExist = true;
-			}
-		}	
 	}
 }
