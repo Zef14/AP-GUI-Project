@@ -21,6 +21,7 @@ public class register extends RegForm implements corrector{
 	boolean usrExist = false,numExist = false; // Flags for existing user/number
 	remover rem;
 	boolean done = false;
+	private boolean invalid = false; // Flag for invalid ID/Name
 	
 	register() throws IOException{
 		
@@ -38,25 +39,32 @@ public class register extends RegForm implements corrector{
 			switch(choice) {
 				case '1': // Teacher register
 					fileName = mgr.getTNID();
-					System.out.print("Enter name: ");
-					name = input.nextLine();
-					System.out.print("Enter ID number: ");
-					number = input.nextLine();
-					correctionChk(name, number);
+					input.nextLine();
+					do {
+						System.out.print("Enter name: ");
+						name = input.nextLine();
+						System.out.print("Enter ID number: ");
+						number = input.nextLine();
+						correctionChk(name, number);
+					}while(invalid);
 					break;
 				case '2': // Student register
 					fileName = mgr.getSNID();
-					System.out.print("Enter name: ");
-					name = input.nextLine();
-					System.out.print("Enter ID number: ");
-					number = input.nextLine();
-					correctionChk(name, number);
+					do {
+						System.out.print("Enter name: ");
+						name = input.nextLine();
+						System.out.print("Enter ID number: ");
+						number = input.nextLine();
+						correctionChk(name, number);
+					}while(invalid);
 					break;
 				case '3': // Subscriber register
 					fileName = mgr.getSubs();
-					System.out.print("Enter name: ");
-					name = input.nextLine();
-					correctionChk(name, "0");
+					do {
+						System.out.print("Enter name: ");
+						name = input.nextLine();
+						correctionChk(name, "A00000000");
+					}while(invalid);
 					break;
 				default:
 					System.out.println("Invalid choice.");
@@ -143,18 +151,37 @@ public class register extends RegForm implements corrector{
 	}
 
 	public void correctionChk(String name, String number) {
-		boolean invalid = false;
+		invalid = false;
+		int count = 0;
 		
-		invalid = name.matches("-?\\d+(\\.\\d+)?");
-		
-		if(invalid) {
-			System.out.print("Invalid name input. Make sure to only use letters and spaces.");
+		// ID CHECK
+		if(number.charAt(0) >= 'A' && number.charAt(0) <= 'Z') { // Initial char must be a capital letter
+			for(int i = 1; i < number.length(); i++) {    
+	          if(number.charAt(i) >= '0' && number.charAt(i) <= '9') // Rest are numbers
+	              count++;
+	        }
 		}
 		
-		invalid = number.matches("-?\\d+(\\.\\d+)?");
+		if(number.charAt(0) < 'A' || number.charAt(0) > 'Z'){ // If there's no initial capital letter, ID is invalid
+			System.out.println("Invalid ID");
+			invalid = true;
+		}
+			
+		if(count < 8 || count > 8) { // If there's more than 8 numbers, ID is invalid
+			System.out.println("Invalid ID");
+			invalid = true;
+		}
 		
-		if(!invalid) {
-			System.out.println("Invalid number input. Only 8 numbers are permitted.");
+		// NAME CHECK
+		if(name.charAt(0) >= 'A' && name.charAt(0) <= 'Z') { // Check for capital letter
+			for(int i = 1; i < name.length(); i++) {
+				if(name.charAt(i) < 'a' || name.charAt(i) > 'z') { // Check for letter
+					if(name.charAt(i) != ' ') { // Check for space
+						invalid = true;
+						System.out.println("INVALID NAME");
+					}
+				}
+			}
 		}
 	}
 	
