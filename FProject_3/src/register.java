@@ -26,6 +26,8 @@ public class register extends RegForm implements corrector{
 	register() throws IOException{
 		
 		while(!done) {
+			numExist = false;
+			usrExist = false;
 			System.out.println("~~~~~~~~~~~~REGISTRATION~~~~~~~~~~~~");
 			System.out.println("1. Register Teacher");
 			System.out.println("2. Register Student");
@@ -90,6 +92,8 @@ public class register extends RegForm implements corrector{
 				rem = new remover(name,fileName);
 				rem.RegForm(name);
 			}
+			if(!done)
+				sysPause.pEnter();
 		}
 	}
 	
