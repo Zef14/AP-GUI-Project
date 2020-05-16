@@ -8,6 +8,7 @@ public class FileMgr {
 	private String adUser = "NULL";
 	private String adPass = "NULL";
 	private String temp = "temp.data";
+	private String history = "history.data";
 	
 	String getDir() {
 		return fileDir;
@@ -51,5 +52,9 @@ public class FileMgr {
 	
 	String getTemp() {
 		return temp;
+	}
+	
+	String getHistory() {
+		return history;
 	}
 }
