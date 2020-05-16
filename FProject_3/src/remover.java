@@ -9,19 +9,27 @@ public class remover extends register implements corrector{
 	private Scanner input = new Scanner(System.in);
 	private FileReader reader;
 	private FileWriter writer;
-	private File file;
 	private BufferedReader br;
 	private FileMgr mgr = new FileMgr();
+	String name,number,fileName;
 	
-	remover(String name, String number) throws IOException{
-		super();
+	remover(String name, String number, String fileName) throws IOException{
+		this.name = name;
+		this.number = number;
+		this.fileName = fileName;
+	}
+	
+	remover(String name, String fileName) throws IOException{
+		this.name = name;
+		this.fileName = fileName;
 	}
 	
 	public void RegForm(String name, String number) throws IOException{
 		
+		System.out.println("Filename is "+fileName);
+		
 		// Copy contents of file to temp file
-		file = new File(mgr.getDir()+getFileName());
-		reader = new FileReader(file);
+		reader = new FileReader(mgr.getDir()+fileName);
 		br = new BufferedReader(reader);
 		writer = new FileWriter(mgr.getDir()+mgr.getTemp());// Temp file
 		String temp; // Holds temporary line of data
@@ -36,7 +44,7 @@ public class remover extends register implements corrector{
     	// Re-write contents of file excluding deleted line
     	reader = new FileReader(mgr.getDir()+mgr.getTemp());
     	br = new BufferedReader(reader);
-    	writer = new FileWriter(mgr.getDir()+getFileName());
+    	writer = new FileWriter(mgr.getDir()+fileName);
     	
     	while((temp = br.readLine()) != null) {
     		if(temp.equals(name+","+number))
@@ -50,8 +58,7 @@ public class remover extends register implements corrector{
 	
 	public void RegForm(String name) throws IOException {
 		// Copy contents of file to temp file
-		file = new File(mgr.getDir()+getFileName());
-		reader = new FileReader(file);
+		reader = new FileReader(mgr.getDir()+fileName);
 		br = new BufferedReader(reader);
 		writer = new FileWriter(mgr.getDir()+mgr.getTemp());// Temp file
 		String temp; // Holds temporary line of data
@@ -66,7 +73,7 @@ public class remover extends register implements corrector{
     	// Re-write contents of file excluding deleted line
     	reader = new FileReader(mgr.getDir()+mgr.getTemp());
     	br = new BufferedReader(reader);
-    	writer = new FileWriter(mgr.getDir()+getFileName());
+    	writer = new FileWriter(mgr.getDir()+fileName);
     	
     	while((temp = br.readLine()) != null) {
     		if(temp.equals(name))

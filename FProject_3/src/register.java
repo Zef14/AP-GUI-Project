@@ -38,6 +38,7 @@ public class register extends RegForm implements corrector{
 			
 			switch(choice) {
 				case '1': // Teacher register
+				case '4': // Teacher remove
 					fileName = mgr.getTNID();
 					input.nextLine();
 					do {
@@ -49,6 +50,8 @@ public class register extends RegForm implements corrector{
 					}while(invalid);
 					break;
 				case '2': // Student register
+				case '5': // Student remove
+					input.nextLine();
 					fileName = mgr.getSNID();
 					do {
 						System.out.print("Enter name: ");
@@ -59,12 +62,17 @@ public class register extends RegForm implements corrector{
 					}while(invalid);
 					break;
 				case '3': // Subscriber register
+				case '6': // Subscriber remove
+					input.nextLine();
 					fileName = mgr.getSubs();
 					do {
 						System.out.print("Enter name: ");
 						name = input.nextLine();
 						correctionChk(name, "A00000000");
 					}while(invalid);
+					break;
+				case '7':
+					done = true;
 					break;
 				default:
 					System.out.println("Invalid choice.");
@@ -74,16 +82,14 @@ public class register extends RegForm implements corrector{
 				regForm(name,number);
 			if(choice == '3')
 				regForm(name);
-			if(choice == '3' || choice == '4') {
-				rem = new remover(name,number);
+			if(choice == '4' || choice == '5') {
+				rem = new remover(name,number,fileName);
 				rem.RegForm(name,number);
 			}
-				
-			if(choice == '5')
-				rem = new remover(name,number);
+			if(choice == '6') {
+				rem = new remover(name,fileName);
 				rem.RegForm(name);
-			if(choice == '6')
-				done = true;
+			}
 		}
 	}
 	
