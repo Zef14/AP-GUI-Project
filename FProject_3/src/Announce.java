@@ -36,18 +36,21 @@ public class Announce extends notify{
 			break;
 		case '2':
 			System.out.println("Write mock announcement:");
+			input.nextLine();
 			message = input.nextLine();
 			sNotify();
 			addHistory();
 			break;
 		case '3':
 			System.out.println("Write mock announcement:");
+			input.nextLine();
 			message = input.nextLine();
 			subNotify();
 			addHistory();
 			break;
 		case '4':
 			System.out.println("Write mock announcement:");
+			input.nextLine();
 			message = input.nextLine();
 			tNotify();
 			sNotify();
@@ -61,14 +64,16 @@ public class Announce extends notify{
 	}
 	
 	public void addHistory() throws IOException {
+		
 		// Copy file to temp
+		mgr = new FileMgr();
 		reader = new FileReader(mgr.getDir()+mgr.getHistory());
 		br = new BufferedReader(reader);
 		writer = new FileWriter(mgr.getDir()+mgr.getTemp());
 		String tempLine;
 		
 		while((tempLine = br.readLine()) != null) {
-			writer.write(tempLine);
+			writer.write(tempLine+"\n");
 		}
 		br.close();
 		reader.close();
@@ -80,17 +85,18 @@ public class Announce extends notify{
 		writer = new FileWriter(mgr.getDir()+mgr.getHistory());
 		
 		while((tempLine = br.readLine()) != null) {
-			writer.write(tempLine);
+			writer.write(tempLine+"\n");
 		}
 		
 		// Add new log to file
-		writer.write("MESSAGE: "+message+"\nSent to ");
+		writer.write("MESSAGE: "+message+"\n");
+		writer.write("Sent to ");
 		switch(choice) {
 		case'1':
-			writer.write("Students\n");
+			writer.write("Teachers\n");
 			break;
 		case '2':
-			writer.write("Teachers\n");
+			writer.write("Students\n");
 			break;
 		case '3':
 			writer.write("Subscribers\n");

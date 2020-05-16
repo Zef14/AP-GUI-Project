@@ -21,7 +21,6 @@ public class notify {
 			System.out.println("Sending to "+splitLine[0]);
 		}
 		System.out.println("Done!");
-		br.close();
 	}
 	
 	// Notify students only
@@ -35,7 +34,6 @@ public class notify {
 			System.out.println("Sending to "+splitLine[0]);
 		}
 		System.out.println("Done!");
-		br.close();
 	}
 	
 	void subNotify() throws IOException{
@@ -47,6 +45,5 @@ public class notify {
 			System.out.println("Sending to "+tempLine);
 		}
 		System.out.println("Done!");
-		br.close();
 	}
 }
