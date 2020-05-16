@@ -1,6 +1,6 @@
 
 public class FileMgr {
-	private String fileDir = "C:\\Users\\Zef\\eclipse-workspace\\FProject_3\\";
+	private String fileDir = "C:\\Users\\Zef\\git\\UIPR-Announcement-System\\FProject_3\\";
 	private String TNID = "TNID.data";
 	private String SNID = "SNID.data";
 	private String ADFile = "ADMIN.data";
