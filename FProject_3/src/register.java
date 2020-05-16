@@ -169,19 +169,23 @@ public class register extends RegForm implements corrector{
 		}
 		
 		if(number.charAt(0) < 'A' || number.charAt(0) > 'Z'){ // If there's no initial capital letter, ID is invalid
-			System.out.println("Invalid ID");
-			invalid = true;
+			if(invalid == false) {
+				System.out.println("Invalid ID");
+				invalid = true;
+			}
 		}
 			
 		if(count < 8 || count > 8) { // If there's more than 8 numbers, ID is invalid
-			System.out.println("Invalid ID");
-			invalid = true;
+			if(invalid == false) {
+				System.out.println("Invalid ID");
+				invalid = true;
+			}
 		}
 		
 		// NAME CHECK
 		if(name.charAt(0) >= 'A' && name.charAt(0) <= 'Z') { // Check for capital letter
 			for(int i = 1; i < name.length(); i++) {
-				if(name.charAt(i) < 'a' || name.charAt(i) > 'z') { // Check for letter
+				if(name.charAt(i) < 'A' || name.charAt(i) > 'z') { // Check for lowercase letter
 					if(name.charAt(i) != ' ') { // Check for space
 						invalid = true;
 						System.out.println("INVALID NAME");
@@ -189,13 +193,5 @@ public class register extends RegForm implements corrector{
 				}
 			}
 		}
-	}
-	
-	public String getFileName() {
-		return fileName;
-	}
-	
-	public char getChoice() {
-		return choice;
 	}
 }

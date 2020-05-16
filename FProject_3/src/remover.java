@@ -26,8 +26,6 @@ public class remover extends register implements corrector{
 	
 	public void RegForm(String name, String number) throws IOException{
 		
-		System.out.println("Filename is "+fileName);
-		
 		// Copy contents of file to temp file
 		reader = new FileReader(mgr.getDir()+fileName);
 		br = new BufferedReader(reader);
