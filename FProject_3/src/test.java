@@ -3,11 +3,26 @@ import java.io.IOException;
 public class test {
 
 	public static void main(String[] args) throws IOException {
-		Options op = new Options();
-		Announce ann = new Announce();
-		History log = new History();
-		List list = new List();
-		register reg = new register();
+		
+		while(!login.credStat) {
+			login();
+			if(login.credStat) {
+				menu menu = new menu();
+			}
+			
+			else
+				System.out.println("Invalid username or password.");
+		}
+		
 	}
 
+	public static void login() throws IOException{
+		login log = new login();
+		log.comparator(log.getUsr(),log.getPass());
+		
+		if(login.credStat)
+			System.out.println("Login success!");
+		else
+			System.out.println("Login fail!");
+	}
 }

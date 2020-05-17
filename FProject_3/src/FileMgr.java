@@ -5,8 +5,6 @@ public class FileMgr {
 	private String SNID = "SNID.data";
 	private String ADFile = "ADMIN.data";
 	private String subs = "Subs.data";
-	private String adUser = "NULL";
-	private String adPass = "NULL";
 	private String temp = "temp.data";
 	private String history = "history.data";
 	
@@ -32,22 +30,6 @@ public class FileMgr {
 	
 	String getSubs() {
 		return subs;
-	}
-	
-	String getAd() {
-		return adUser;
-	}
-	
-	void setAd(String adUser) {
-		this.adUser = adUser;
-	}
-	
-	String getPass() {
-		return adPass;
-	}
-	
-	void setPass(String adPass) {
-		this.adPass = adPass;
 	}
 	
 	String getTemp() {
